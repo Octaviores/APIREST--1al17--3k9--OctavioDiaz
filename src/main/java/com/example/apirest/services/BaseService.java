@@ -6,13 +6,21 @@ package com.example.apirest.services;
 //Esta inteface se puede utilizar en cualquier servicio sin necesidad
 // de declarar los métodos en cada uno
 
-import java.util.List;
+import com.example.apirest.entities.Base;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-public interface BaseService<E> {
+
+import java.io.Serializable;
+import java.util.List;
+@Service
+public interface BaseService<E extends Base, ID extends Serializable> {
     public List<E> findAll() throws Exception;
-    public E findById(Long Id) throws Exception;
+    public Page<E> findAll(Pageable pageable) throws  Exception;
+    public E findById(ID Id) throws Exception;
     public E save (E entity) throws Exception;
-    public E update (Long id, E entity) throws Exception;
-    public boolean delete (Long id) throws Exception;
+    public E update (ID id, E entity) throws Exception;
+    public boolean delete (ID id) throws Exception;
 
 }
